@@ -1,18 +1,16 @@
 {
-  "scripts": {
-    "dev": "pnpx tsx ./test.ts"
-  },
-  "dependencies": {
-    "@types/js-yaml": "^4.0.9",
-    "arktype": "^2.1.20",
-    "dotenv": "^17.2.0",
-    "openai": "^5.10.1"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.31.0",
-    "@ianvs/prettier-plugin-sort-imports": "^4.5.1",
-    "@types/node": "^24.0.15",
-    "eslint-config-prettier": "^10.1.8",
-    "typescript-eslint": "^8.37.0"
-  }
+    "name": "llm-stuff",
+    "dependencies": {
+        "@types/js-yaml": "^4.0.9",
+        "arktype": "^2.1.20",
+        "dotenv": "^17.2.0",
+        "openai": "^5.10.1"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.31.0",
+        "@ianvs/prettier-plugin-sort-imports": "^4.5.1",
+        "@types/node": "^24.0.15",
+        "eslint-config-prettier": "^10.1.8",
+        "typescript-eslint": "^8.37.0"
+    }
 }

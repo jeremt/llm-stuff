@@ -1,6 +1,9 @@
 import dotenv from "dotenv";
-import {task, llm, webSearch, flow} from "./lib";
+import {task} from "../src/task";
 import {type} from "arktype";
+import {llm} from "../src/llm";
+import {webSearch} from "../src/webSearch";
+import {flow} from "../src/flow";
 
 dotenv.config({quiet: true});
 
@@ -118,7 +121,10 @@ Provide a comprehensive answer using the research results.`,
 });
 
 const main = async () => {
-    await flow([mainTask, webSearchTask, answerTask], "main", kv);
+    for await (const taskState of flow([mainTask, webSearchTask, answerTask], "main", kv)) {
+        const {key, status, ...rest} = taskState;
+        console.log(`\x1b[33m[${status}] ${key}\x1b[0m`, rest);
+    }
     console.log(kv.get("answer"));
 };
 
