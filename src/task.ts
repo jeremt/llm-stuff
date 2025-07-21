@@ -13,18 +13,4 @@ export type Task<Inputs, Outputs, TaskKey extends string> = {
     msForRetry?: number;
 };
 
-export type TaskState =
-    | {
-          status: "running";
-          key: string;
-      }
-    | {
-          status: "before_running";
-          key: string;
-      }
-    | {
-          status: "after_running";
-          key: string;
-      };
-
 export const task = <Inputs, Outputs, TaskKey extends string>(params: Task<Inputs, Outputs, TaskKey>) => params;

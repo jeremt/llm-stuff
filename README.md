@@ -8,4 +8,4 @@ You can run the examples using tsx, for example:
 pnpx tsx ./examples/agent.ts
 ```
 
--   **agent** simple agentic workflow with 3 agents
+-   **webSearch** simple agentic workflow that search infos on the web to improve its answers

@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import {task} from "../src/task";
 import {type} from "arktype";
-import {llm} from "../src/llm";
+import {llm, responseSchema} from "../src/llm";
 import {webSearch} from "../src/webSearch";
 import {flow} from "../src/flow";
 
@@ -54,7 +54,7 @@ Previous Research: ${context}
 Decide the next action based on the context and available actions.
 `,
             OPENAI_API_KEY,
-            {...(outputsSchema.toJsonSchema() as any), additionalProperties: false} // necesarry for strict
+            {schema: responseSchema(outputsSchema)}
         );
         return response;
     },
@@ -82,10 +82,7 @@ const webSearchTask = task({
         const previous = store.get("context");
         store.set(
             "context",
-            `${previous}
-searchQuery: ${store.get("search_query")}
-results: ${results}
-        `
+            `${previous ? `${previous}\n` : ""}searchQuery: ${store.get("search_query")}\nresults: ${results}`
         );
         return "main"; // always go back to main after searching
     },
@@ -103,12 +100,12 @@ const answerTask = task({
     },
     run: async ({question, context}) => {
         const answer = await llm(
-            `### CONTEXT
+            `# Context
 Based on the following information, answer the question.
 Question: ${question}
 Research: ${context}
 
-## YOUR ANSWER:
+## Your answer
 Provide a comprehensive answer using the research results.`,
             OPENAI_API_KEY
         );
